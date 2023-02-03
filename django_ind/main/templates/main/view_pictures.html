@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1></h1>
+<table border="3" align="center" width="70%" cellspacing="0">
+        <th>№</th>
+        <th>Название картины</th>
+        <th>Жанр</th>
+        <th>Год</th>
+        <th>Художник</th>
+        <th>Название галереи</th>
+
+        {%for el in pictures%}
+                <tr style="cursor: pointer" onclick="">
+        <td>{{el.id}}</td>
+        <td>{{el.name}}</td>
+        <td>{{el.genre}}</td>
+        <td>{{el.year}}</td>
+        <td>{{el.painter.name}}</td>
+        <td>{{el.gallery.name}}</td>
+        <tr></tr>
+        {% endfor %}
+</table>
+<form method="get" action="{% url 'thanks' %}">
+    {% csrf_token %}
+    <input name="name" type="text" placeholder="Картина" class="form-control">
+    <input name="genre" type="text" placeholder="Жанр" class="form-control">
+    <input name="year" type="date" placeholder=" YYYY-MM-DD" class="form-control">
+    <select class="form-select" aria-label="Default select example" name="painter" required="">
+        {% for el in painters%}
+            <option>{{ el.name }}</option>
+        {% endfor %}
+            </select>
+    <select class="form-select" aria-label="Default select example" name="gallery" required="">
+        {% for el in galleries%}
+            <option>{{ el.name }}</option>
+        {% endfor %}
+            </select>
+    <button type="submit" class="btn btn-success"> Добавить </button><br>
+</form>
+<form method="" action="change_picture">
+    {% csrf_token %}
+    <input name="id" type="number" placeholder="Изменяемый объект" class="form-control">
+    <input name="name" type="text" placeholder="Картина" class="form-control">
+    <input name="genre" type="text" placeholder="Жанр" class="form-control">
+    <input name="year" type="date" placeholder=" YYYY-MM-DD" class="form-control">
+    <select class="form-select" aria-label="Default select example" name="painter" required="">
+        {% for el in painters%}
+            <option>{{ el.name }}</option>
+        {% endfor %}
+            </select>
+    <select class="form-select" aria-label="Default select example" name="gallery" required="">
+        {% for el in galleries%}
+            <option>{{ el.name }}</option>
+        {% endfor %}
+            </select>
+    <button type="submit" class="btn btn-success"> Изменить </button><br>
+</form>
+<a href="/" class="btn btn-lg btn-light fw-bold border-white bg-white">Вернуться на главную</a>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ВСЕ ГАЛЕРЕИ</title>
+</head>
+<body>
+<table border="3" align="center" width="70%" cellspacing="0">
+            <tr>
+        <th>№</th>
+        <th>Название галереи</th>
+        <th>Город</th>
+        <th>Страна</th>
+            </tr>
+    {%for el in galleries%}
+    <tr style="cursor: pointer">
+    <td>{{el.id}}</td>
+    <td>{{el.name}}</td>
+    <td>{{el.city}}</td>
+    <td>{{el.country}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<form method="post">
+    {% csrf_token %}
+    {{ form.name }}
+    {{ form.city }}
+    {{ form.country }}
+    <button type="submit" class="btn btn-success"> Добавить </button>
+</form>
+<form method="" action="change_gallery">
+    {% csrf_token %}
+    <input name="id" type="number" placeholder="Изменяемый объект" class="form-control">
+    <input name="name" type="text" placeholder="Галерея" class="form-control">
+    <input name="city" type="text" placeholder="Город" class="form-control">
+    <input name="country" type="text" placeholder="Страна" class="form-control">
+    <button type="submit" class="btn btn-success"> Изменить </button><br>
+</form>
+<a href="/" class="btn btn-lg btn-light fw-bold border-white bg-white">Вернуться на главную</a>
+</body>
+</html>
